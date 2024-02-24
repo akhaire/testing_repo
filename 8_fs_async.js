@@ -120,11 +120,3 @@ readFile('./content/first.txt', 'utf8', (error, result) => {
 
 
 
-
-// // gettext('./content/first.txt')
-// // .then(result=>{
-//     //     console.log(result)
-//     // })
-// // .catch((err)=>{
-// //     console.log(err)
-// // })
