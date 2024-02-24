@@ -11,9 +11,11 @@ http.createServer(function(req,res){
     filestream.on('open',()=>{
         filestream.pipe(res)
         
+
     })
 
     filestream.on('error',(err)=>{
         res.end(err)
+
     })
 }).listen(5000)
