@@ -1,19 +1,25 @@
-const http = require('http')
-const {fs, createReadStream} = require('fs')
+const express = require('express')
+const path = require('path')
+const app = express()
 
 
-http.createServer(function(req,res){
-    // const text = fs.readFileSync('./content/bigfile.txt','utf8');
-    // res.end(text)
-    const filestream = createReadStream('./content/bigfile.txt','utf8')
-    filestream.on('open',()=>{
-        filestream.pipe(res)
-        
+//setup static and middleware
+app.use(express.static('./public'))
 
-    })
+app.get('/',(req,res)=>{
+    // res.status(200).send('Hello world sssss')
+    res.sendFile(path.resolve(__dirname,'./navbar-app/index.html'))
+})
 
-    filestream.on('error',(err)=>{
-        res.end(err)
+app.get('/about',(req,res)=>{
+    res.status(200).send('About page')
+})
 
-    })
-}).listen(5000)
+app.all('*',(req,res)=>{
+    res.status(404).send('<h1>Resource not found</h1>')
+})
+
+app.listen(5000,()=>{
+    console.log('server is listening to port 5000')
+})
+
